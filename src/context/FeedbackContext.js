@@ -22,15 +22,30 @@ export const FeedbackProvider = ({ children }) => {
     }
   ]);
 
+  const [feedbackEdit, setFeedbackEdit] = useState({
+    item: {},
+    edit: false
+  });
+
+  // Delete feedback
   const deleteFeedback = (id) => {
     if (window.confirm('Are you sure you want to delete?')) {
       setFeedBack(feedback.filter((item) => item.id !== id));
     }
   };
 
+  // Add Feedback
   const addFeedBack = (newFeedback) => {
     newFeedback.id = uuidv4();
     setFeedBack([newFeedback, ...feedback]);
+  };
+
+  // Set items to be updated
+  const editFeedback = (item) => {
+    setFeedbackEdit({
+      item,
+      edit: true
+    });
   };
 
   return (
@@ -38,7 +53,9 @@ export const FeedbackProvider = ({ children }) => {
       value={{
         feedback,
         deleteFeedback,
-        addFeedBack
+        addFeedBack,
+        editFeedback,
+        feedbackEdit
       }}
     >
       {children}
