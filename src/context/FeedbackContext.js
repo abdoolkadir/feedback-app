@@ -17,7 +17,9 @@ export const FeedbackProvider = ({ children }) => {
 
   // Fetch feedback
   const fetchFeedback = async () => {
-    const response = await fetch(`/feedback?_sort=id&_order=desc`);
+    const response = await fetch(
+      `https://feedbak-app-backend.herokuapp.com/feedback?_sort=id&_order=desc`
+    );
 
     const data = await response.json();
 
@@ -28,20 +30,25 @@ export const FeedbackProvider = ({ children }) => {
   // Delete feedback
   const deleteFeedback = async (id) => {
     if (window.confirm('Are you sure you want to delete?')) {
-      await fetch(`/feedback/${id}`, { method: 'DELETE' });
+      await fetch(`https://feedbak-app-backend.herokuapp.com/feedback/${id}`, {
+        method: 'DELETE'
+      });
       setFeedBack(feedback.filter((item) => item.id !== id));
     }
   };
 
   // Add Feedback
   const addFeedBack = async (newFeedback) => {
-    const response = await fetch('/feedback', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newFeedback)
-    });
+    const response = await fetch(
+      'https://feedbak-app-backend.herokuapp.com/feedback',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newFeedback)
+      }
+    );
 
     const data = await response.json();
 
@@ -50,13 +57,16 @@ export const FeedbackProvider = ({ children }) => {
 
   // Update feedback
   const updateFeedback = async (id, updItem) => {
-    const response = await fetch(`/feedback/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(updItem)
-    });
+    const response = await fetch(
+      `https://feedbak-app-backend.herokuapp.com/feedback/${id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updItem)
+      }
+    );
 
     const data = await response.json();
 
